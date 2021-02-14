@@ -21,6 +21,7 @@ use Contao\CoreBundle\DependencyInjection\Compiler\AddResourcesPathsPass;
 use Contao\CoreBundle\DependencyInjection\Compiler\AddSessionBagsPass;
 use Contao\CoreBundle\DependencyInjection\Compiler\CrawlerPass;
 use Contao\CoreBundle\DependencyInjection\Compiler\DataContainerCallbackPass;
+use Contao\CoreBundle\DependencyInjection\Compiler\FrontendPreviewProviderPass;
 use Contao\CoreBundle\DependencyInjection\Compiler\MakeServicesPublicPass;
 use Contao\CoreBundle\DependencyInjection\Compiler\PickerProviderPass;
 use Contao\CoreBundle\DependencyInjection\Compiler\RegisterFragmentsPass;
@@ -86,6 +87,7 @@ class ContaoCoreBundle extends Bundle
         $container->addCompilerPass(new AddResourcesPathsPass());
         $container->addCompilerPass(new TaggedMigrationsPass());
         $container->addCompilerPass(new PickerProviderPass());
+        $container->addCompilerPass(new FrontendPreviewProviderPass());
         $container->addCompilerPass(new RegisterPagesPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 1);
 
         $container->addCompilerPass(

@@ -1,13 +1,13 @@
 <style>
     .cto-toolbar {
-        font-family: -apple-system,system-ui,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+        font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
         font-weight: 400;
         font-size: 14px;
         line-height: 1;
         color: #444;
     }
 
-    @media (-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi) {
+    @media (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi) {
         .cto-toolbar {
             font-weight: 300;
             color: #222;
@@ -178,33 +178,63 @@
         color: #aaa;
     }
 </style>
+
+
+<template id="cto-toolbar-scripts">
+    {% for script in scripts %}
+        {{ script|raw }}
+    {% endfor %}
+</template>
+
+
 <script>
     (function () {
-        const toolbar = document.createElement('div');
+        customElements.define('contao-toolbar',
+        class extends HTMLElement {
+            constructor() {
+                super();
+
+                const shadow = this.attachShadow({mode: 'open'});
+                const wrapper = document.createElement('div');
+                wrapper.setAttribute('class', 'cto-toolbar__wrapper');
+
+                const close = document.createElement('div');
+                close.setAttribute('class', 'cto-toolbar__close');
+                close.innerHTML = '<a href="">&times;</a>';
+
+                // Fetch toolbar
+                fetch('{{ action }}')
+                    .then(response => response.text())
+                    .then(html => {
+                        const event = new Event('cto-toolbar-loaded');
+
+                        wrapper.innerHTML = html;
+                        window.dispatchEvent(event);
+                    })
+                ;
+
+                // Create some CSS to apply to the shadow dom
+                var style = document.createElement('style');
+
+                style.textContent = `
+.cto-toolbar__wrapper {
+  background: #f2f2f2;
+}
+`;
+
+                // Attach the created elements to the shadow dom
+                shadow.appendChild(style);
+                shadow.appendChild(document.querySelector('template[id="cto-toolbar-scripts"]').content);
+                shadow.appendChild(wrapper);
+                shadow.appendChild(close);
+            }
+        });
+
+        const toolbar = document.createElement('contao-toolbar');
         toolbar.classList.add('cto-toolbar');
         document.querySelector('body').prepend(toolbar);
 
-        function request(method, uri, body, callback, addClass = true) {
-            body = body || null;
-            const request = new XMLHttpRequest();
-            request.open(method, uri, true);
-            request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-
-            if (body instanceof URLSearchParams) {
-                request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
-            }
-
-            if (addClass) {
-                toolbar.classList.add('ajax-loading');
-            }
-
-            request.onload = function () {
-                toolbar.classList.remove('ajax-loading');
-                callback.apply(this);
-            };
-
-            request.send(body)
-        }
+        window.contaoToolbar = toolbar;
 
         // Initialize toolbar
         if ('hidden' === localStorage.getItem('contao/previewBar/displayState')) {
@@ -213,70 +243,13 @@
             toolbar.classList.add('cto-toolbar--visible');
         }
 
-        // Fetch toolbar
-        request('GET', '{{ action }}', null, function () {
-            if (200 === this.status) {
-                toolbar.innerHTML = this.responseText;
-
-                const event = new Event('cto-toolbar-loaded');
-                window.dispatchEvent(event);
-            } else {
-                toolbar.innerHTML = '<p>Error while loading the preview bar.</p>';
-            }
-        });
-
-        // Js for the authenticator
+        // Collapse toolbar
         window.addEventListener("cto-toolbar-loaded", function () {
-            const form = toolbar.querySelector('input[name="FORM_SUBMIT"][value="tl_switch"]').form;
-
-            if (!form) {
-                return;
-            }
-
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
-                const formData = new FormData(form);
-
-                request('POST', form.action, formData, function () {
-                    if (204 === this.status) {
-                        location.reload();
-                    } else {
-                        location.reload();
-                    }
-                });
-            });
-
-            if (document.createElement('datalist') && window.HTMLDataListElement) {
-                const userField = form.querySelector('input[name="user"]');
-
-                if (userField) {
-                    userField.addEventListener('input', function () {
-                        if (userField.value.length < 2) {
-                            return;
-                        }
-
-                        const body = {
-                            FORM_SUBMIT: 'datalist_members',
-                            REQUEST_TOKEN: form.querySelector('input[name="REQUEST_TOKEN"]').value,
-                            value: userField.value
-                        };
-
-                        const userList = form.querySelector('datalist[id="userlist"]');
-
-                        request('POST', form.action, new URLSearchParams(body), function () {
-                            userList.innerHTML = '';
-                            JSON.parse(this.response).forEach(item => {
-                                const option = document.createElement('option');
-                                option.value = item;
-                                userList.appendChild(option);
-                            });
-                        }, false);
-                    });
-                }
-            }
-
-            // Collapse toolbar
             Array.from([toolbar.querySelector('.cto-toolbar__close'), toolbar.querySelector('.cto-toolbar__open')]).forEach(toggle => {
+                if (null === toggle) {
+                    return;
+                }
+
                 toggle.addEventListener('click', function (event) {
                     event.preventDefault();
 

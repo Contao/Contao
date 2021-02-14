@@ -240,6 +240,7 @@ services:
             - '@contao.routing.scope_matcher'
             - '@twig'
             - '@router'
+            - '@contao.preview_provider_manager'
         tags:
             - kernel.event_listener
 
