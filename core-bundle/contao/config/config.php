@@ -83,7 +83,6 @@ use Contao\OptionWizard;
 use Contao\PageError401;
 use Contao\PageError403;
 use Contao\PageError404;
-use Contao\PageForward;
 use Contao\PageLogout;
 use Contao\PageModel;
 use Contao\PageRedirect;
@@ -340,7 +339,6 @@ $GLOBALS['TL_FFL'] = array
 $GLOBALS['TL_PTY'] = array
 (
 	'regular'   => PageRegular::class,
-	'forward'   => PageForward::class,
 	'redirect'  => PageRedirect::class,
 	'logout'    => PageLogout::class,
 	'error_401' => PageError401::class,
