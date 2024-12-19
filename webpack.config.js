@@ -25,21 +25,22 @@ Encore
     .disableSingleRuntimeChunk()
     .enableSourceMaps(!Encore.isProduction())
     .enableVersioning(Encore.isProduction())
-    .configureCssLoader(config => {
-        config.url = false;
+    .enablePostCssLoader()
+    .cleanupOutputBeforeBuild(config => {
+        config.keep = /(fonts|icons|styles)\//;
     })
     .cleanupOutputBeforeBuild(config => {
         config.keep = /(fonts|icons|styles)\//;
     })
-    .addStyleEntry('backend', './core-bundle/contao/themes/flexible/styles/main.css')
-    .addStyleEntry('confirm', './core-bundle/contao/themes/flexible/styles/confirm.css')
-    .addStyleEntry('conflict', './core-bundle/contao/themes/flexible/styles/conflict.css')
-    .addStyleEntry('diff', './core-bundle/contao/themes/flexible/styles/diff.css')
-    .addStyleEntry('help', './core-bundle/contao/themes/flexible/styles/help.css')
-    .addStyleEntry('login', './core-bundle/contao/themes/flexible/styles/login.css')
-    .addStyleEntry('popup', './core-bundle/contao/themes/flexible/styles/popup.css')
-    .addStyleEntry('tinymce', './core-bundle/contao/themes/flexible/styles/tinymce.css')
-    .addStyleEntry('tinymce-dark', './core-bundle/contao/themes/flexible/styles/tinymce-dark.css')
+    .addEntry('backend', './core-bundle/contao/themes/flexible/styles/_main.pcss')
+    .addEntry('confirm', './core-bundle/contao/themes/flexible/styles/pages/_confirm.pcss')
+    .addEntry('conflict', './core-bundle/contao/themes/flexible/styles/pages/_conflict.pcss')
+    .addEntry('diff', './core-bundle/contao/themes/flexible/styles/pages/_diff.pcss')
+    .addEntry('help', './core-bundle/contao/themes/flexible/styles/pages/_help.pcss')
+    .addEntry('login', './core-bundle/contao/themes/flexible/styles/pages/_login.pcss')
+    .addEntry('popup', './core-bundle/contao/themes/flexible/styles/pages/_popup.pcss')
+    .addEntry('tinymce', './core-bundle/contao/themes/flexible/styles/components/_tinymce.pcss')
+    .addEntry('tinymce-dark', './core-bundle/contao/themes/flexible/styles/components/_tinymce-dark.pcss')
 ;
 
 const themeConfig = Encore.getWebpackConfig();

@@ -1,45 +1,5 @@
-@import 'fonts.css';
-@import 'basic.css';
-
-/* Icons */
-:root {
-	--row-padding: 9px;
-	--icon-logo: url("icons/logo.svg");
-	--icon-profile: url("icons/profile_small.svg");
-	--icon-security: url("icons/shield_small.svg");
-	--icon-favorites: url("icons/favorites_small.svg");
-	--icon-logout: url("icons/exit.svg");
-	--icon-toggle-all: url("icons/chevron-right.svg");
-	--icon-alert: url("icons/alert.svg");
-	--icon-favorite: url("icons/favorite.svg");
-	--icon-favorite--active: url("icons/favorite_active.svg");
-	--icon-manual: url("icons/manual.svg");
-	--icon-color-scheme: url("icons/color_scheme.svg");
-	--icon-arrow-left: url("icons/arrow_left.svg");
-	--icon-arrow-right: url("icons/arrow_right.svg");
-	--icon-visible: url("icons/visible.svg");
-	--icon-invisible: url("icons/invisible.svg");
-	--icon-loading: url("icons/loading.svg");
-}
-
-html[data-color-scheme="dark"] {
-	--icon-logo: url("icons/logo--dark.svg");
-	--icon-profile: url("icons/profile_small--dark.svg");
-	--icon-security: url("icons/shield_small--dark.svg");
-	--icon-favorites: url("icons/favorites_small--dark.svg");
-	--icon-logout: url("icons/exit--dark.svg");
-	--icon-toggle-all: url("icons/chevron-right--dark.svg");
-	--icon-alert: url("icons/alert--dark.svg");
-	--icon-favorite: url("icons/favorite--dark.svg");
-	--icon-favorite--active: url("icons/favorite_active--dark.svg");
-	--icon-manual: url("icons/manual--dark.svg");
-	--icon-color-scheme: url("icons/color_scheme--dark.svg");
-	--icon-arrow-left: url("icons/arrow_left--dark.svg");
-	--icon-arrow-right: url("icons/arrow_right--dark.svg");
-	--icon-visible: url("icons/visible--dark.svg");
-	--icon-invisible: url("icons/invisible--dark.svg");
-	--icon-loading: url("icons/loading--dark.svg");
-}
+@import "./base/_index.pcss";
+@import "_icons.pcss";
 
 /* Account for the jump links bar */
 html {
@@ -143,7 +103,7 @@ body.popup {
 	font-weight: 400;
 	border: none;
 	padding-right: 26px;
-	background: url("icons/chevron-down.svg") right 9px top 14px no-repeat;
+	background: url("../icons/chevron-down.svg") right 9px top 14px no-repeat;
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
@@ -168,7 +128,7 @@ body.popup {
 	margin-top: 5px;
 	background: var(--content-bg);
 	border: 1px solid var(--content-border);
-	box-shadow: 0 1px 6px rgba(0,0,0,.2);
+	box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
 	z-index: 4; /* Above .jump-targets */
 	color: var(--text);
 	text-align: left;
@@ -382,23 +342,23 @@ body.popup {
 }
 
 #tl_navigation .group-favorites {
-	background: url("icons/favorites_group.svg") 3px 2px no-repeat;
+	background: url("../icons/favorites_group.svg") 3px 2px no-repeat;
 }
 
 #tl_navigation .group-content {
-	background: url("icons/content.svg") 3px 2px no-repeat;
+	background: url("../icons/content.svg") 3px 2px no-repeat;
 }
 
 #tl_navigation .group-design {
-	background: url("icons/monitor.svg") 3px 2px no-repeat;
+	background: url("../icons/monitor.svg") 3px 2px no-repeat;
 }
 
 #tl_navigation .group-accounts {
-	background: url("icons/person.svg") 3px 2px no-repeat;
+	background: url("../icons/person.svg") 3px 2px no-repeat;
 }
 
 #tl_navigation .group-system {
-	background: url("icons/wrench.svg") 3px 2px no-repeat;
+	background: url("../icons/wrench.svg") 3px 2px no-repeat;
 }
 
 #tl_navigation .menu_level_1 {
@@ -555,7 +515,7 @@ h2.sub_headline {
 .tl_gerror {
 	margin: 12px;
 	padding: 3px 0 3px 22px;
-	background: url("icons/error.svg") no-repeat left center;
+	background: url("../icons/error.svg") no-repeat left center;
 }
 
 .tl_error, .tl_confirm, .tl_info, .tl_new {
@@ -565,19 +525,19 @@ h2.sub_headline {
 }
 
 .tl_error {
-	background: var(--error-bg) url("icons/error.svg") no-repeat 11px 12px;
+	background: var(--error-bg) url("../icons/error.svg") no-repeat 11px 12px;
 }
 
 .tl_confirm {
-	background: var(--confirm-bg) url("icons/ok.svg") no-repeat 11px 12px;
+	background: var(--confirm-bg) url("../icons/ok.svg") no-repeat 11px 12px;
 }
 
 .tl_info {
-	background: var(--info-bg) url("icons/show.svg") no-repeat 11px 12px;
+	background: var(--info-bg) url("../icons/show.svg") no-repeat 11px 12px;
 }
 
 .tl_new {
-	background: var(--new-bg) url("icons/featured.svg") no-repeat 11px 12px;
+	background: var(--new-bg) url("../icons/featured.svg") no-repeat 11px 12px;
 }
 
 .tl_gerror, .tl_gerror a, .tl_error, .tl_error a {
@@ -652,11 +612,11 @@ h2.sub_headline {
 }
 
 .filter_apply {
-	background: url("icons/filter-apply.svg") center center no-repeat;
+	background: url("../icons/filter-apply.svg") center center no-repeat;
 }
 
 .filter_reset {
-	background: url("icons/filter-reset.svg") center center no-repeat;
+	background: url("../icons/filter-reset.svg") center center no-repeat;
 }
 
 .tl_subpanel {
@@ -943,7 +903,7 @@ h2.sub_headline {
 
 #tl_crawl .progress-bar.running {
 	background-color: var(--progress-running);
-	background-image: linear-gradient(45deg, rgba(255,255,255,.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.15) 50%, rgba(255,255,255,.15) 75%, transparent 75%, transparent);
+	background-image: linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
 	animation: crawl-progress-bar-stripes 1s linear infinite;
 }
 
@@ -1554,7 +1514,7 @@ table.tl_listing {
 
 .cte_type.icon-protected {
 	padding-left: 27px;
-	background: var(--table-header) url("icons/protected.svg") 8px 8px no-repeat;
+	background: var(--table-header) url("../icons/protected.svg") 8px 8px no-repeat;
 }
 
 .cte_type .visibility {
@@ -2516,7 +2476,7 @@ ul.sortable button[disabled] {
 }
 
 ul.sortable button[disabled]:hover {
-	background: rgba(255,255,255,.7);
+	background: rgba(255, 255, 255, .7);
 }
 
 #picker-menu {
@@ -2551,7 +2511,7 @@ ul.sortable button[disabled]:hover {
 
 #picker-menu a {
 	padding: 3px 12px 3px 32px;
-	background: url("icons/mover.svg") 12px center no-repeat;
+	background: url("../icons/mover.svg") 12px center no-repeat;
 }
 
 #picker-menu a:hover {
@@ -2559,22 +2519,22 @@ ul.sortable button[disabled]:hover {
 }
 
 #picker-menu a.pagePicker {
-	background-image: url("icons/pagemounts.svg");
+	background-image: url("../icons/pagemounts.svg");
 	background-size: 16px;
 }
 
 #picker-menu a.filePicker {
-	background-image: url("icons/filemounts.svg");
+	background-image: url("../icons/filemounts.svg");
 	background-size: 14px;
 }
 
 #picker-menu a.articlePicker {
-	background-image: url("icons/articles.svg");
+	background-image: url("../icons/articles.svg");
 	background-size: 16px;
 }
 
 #picker-menu a.close {
-	background-image: url("icons/back.svg");
+	background-image: url("../icons/back.svg");
 }
 
 .ace_editor {
@@ -2676,39 +2636,39 @@ time[title] {
 
 /* Header icons */
 .header_clipboard {
-	background-image: url("icons/clipboard.svg");
+	background-image: url("../icons/clipboard.svg");
 }
 
 .header_back {
-	background-image: url("icons/back.svg");
+	background-image: url("../icons/back.svg");
 }
 
 .header_new {
-	background-image: url("icons/new.svg");
+	background-image: url("../icons/new.svg");
 }
 
 .header_rss {
-	background-image: url("icons/rss.svg");
+	background-image: url("../icons/rss.svg");
 }
 
 .header_edit_all {
-	background-image: url("icons/all.svg");
+	background-image: url("../icons/all.svg");
 }
 
 .header_new_folder {
-	background-image: url("icons/newfolder.svg");
+	background-image: url("../icons/newfolder.svg");
 }
 
 .header_css_import {
-	background-image: url("icons/cssimport.svg");
+	background-image: url("../icons/cssimport.svg");
 }
 
 .header_theme_import {
-	background-image: url("icons/theme_import.svg");
+	background-image: url("../icons/theme_import.svg");
 }
 
 .header_store {
-	background-image: url("icons/store.svg");
+	background-image: url("../icons/store.svg");
 }
 
 .header_toggle {
@@ -2717,12 +2677,12 @@ time[title] {
 }
 
 .header_sync {
-	background-image: url("icons/sync.svg");
+	background-image: url("../icons/sync.svg");
 }
 
 /* Visual hint for TRBL fields - thanks to Eugene Rybyakov */
 .tl_text_trbl, .tl_imageSize_0, .tl_imageSize_1, #ctrl_playerSize input {
-	background: var(--form-bg) url("icons/hints.svg") no-repeat right 1px top 2px;
+	background: var(--form-bg) url("../icons/hints.svg") no-repeat right 1px top 2px;
 }
 
 #ctrl_playerSize_1, .tl_imageSize_1 {
@@ -2796,7 +2756,7 @@ label.error, legend.error, .tl_checkbox_container.error legend {
 .broken-image {
 	display: inline-block;
 	padding: 12px 12px 12px 30px;
-	background: var(--error-bg) url("icons/error.svg") no-repeat 9px center;
+	background: var(--error-bg) url("../icons/error.svg") no-repeat 9px center;
 	color: var(--red);
 	text-indent: 0;
 }
@@ -2820,7 +2780,7 @@ fieldset:is(.tl_tbox,.tl_box) > legend {
 	box-sizing: border-box;
 	color: var(--legend);
 	padding: 9px 12px 9px 28px;
-	background: url("icons/navcol.svg") 13px 10px no-repeat;
+	background: url("../icons/navcol.svg") 13px 10px no-repeat;
 	width: 100%;
 }
 
@@ -2840,7 +2800,7 @@ fieldset:is(.tl_tbox,.tl_box) > legend > button {
 	line-height: inherit;
 	box-sizing: border-box;
 	padding: 9px 12px 9px 28px;
-	background: transparent url("icons/navcol.svg") 13px 10px no-repeat;
+	background: transparent url("../icons/navcol.svg") 13px 10px no-repeat;
 	cursor: pointer;
 }
 
@@ -2855,7 +2815,7 @@ fieldset.collapsed div {
 
 fieldset.collapsed > legend > button,
 fieldset.collapsed > legend:not(:has(> button)) {
-	background-image: url("icons/navexp.svg");
+	background-image: url("../icons/navexp.svg");
 }
 
 /* Maintenance */
@@ -3109,11 +3069,11 @@ fieldset.collapsed > legend:not(:has(> button)) {
 	}
 
 	#tmenu .icon-debug {
-		background: url("icons/debug.svg") center center no-repeat;
+		background: url("../icons/debug.svg") center center no-repeat;
 	}
 
 	#tmenu .icon-preview {
-		background: url("icons/preview.svg") center center no-repeat;
+		background: url("../icons/preview.svg") center center no-repeat;
 	}
 
 	#tmenu .profile button {
@@ -3123,7 +3083,7 @@ fieldset.collapsed > legend:not(:has(> button)) {
 		overflow: hidden;
 		white-space: nowrap;
 		text-indent: 28px; /* 16px width + 12px padding */
-		background: url("icons/profile.svg") center center no-repeat;
+		background: url("../icons/profile.svg") center center no-repeat;
 		background-size: 18px;
 	}
 
