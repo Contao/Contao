@@ -76,6 +76,16 @@ services:
             - '@database_connection'
             - '@request_stack'
 
+    contao.listener.data_container.content_element_type:
+        class: Contao\CoreBundle\EventListener\DataContainer\ContentElementTypeListener
+        arguments:
+            - '@security.helper'
+
+    contao.listener.data_container.content_record_label:
+        class: Contao\CoreBundle\EventListener\DataContainer\ContentRecordLabelListener
+        arguments:
+            - '@translator'
+
     contao.listener.data_container.csp_save_callback:
         class: Contao\CoreBundle\EventListener\DataContainer\CspSaveCallbackListener
         arguments:
@@ -120,6 +130,11 @@ services:
 
     contao.listener.data_container.enum_options:
         class: Contao\CoreBundle\EventListener\DataContainer\EnumOptionsListener
+        arguments:
+            - '@translator'
+
+    contao.listener.data_container.fallback_record_label:
+        class: Contao\CoreBundle\EventListener\DataContainer\FallbackRecordLabelListener
         arguments:
             - '@translator'
 
@@ -314,6 +329,11 @@ services:
             - '@translator'
             - '@contao.routing.scope_matcher'
             - '@contao.intl.locales'
+
+    contao.listener.make_backend_response_uncacheable:
+        class: Contao\CoreBundle\EventListener\MakeBackendResponseUncacheableListener
+        arguments:
+            - '@contao.routing.scope_matcher'
 
     contao.listener.make_response_private:
         class: Contao\CoreBundle\EventListener\MakeResponsePrivateListener
