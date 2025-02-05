@@ -1002,8 +1002,6 @@ class FigureBuilderTest extends TestCase
         $container = $this->getContainerWithContaoConfiguration();
         System::setContainer($container);
 
-        $GLOBALS['TL_DCA']['tl_files']['fields']['meta']['eval']['metaFields'] = ['title' => ''];
-
         $currentPage = $this->mockClassWithProperties(PageModel::class);
         $currentPage->language = 'en';
         $currentPage->rootFallbackLanguage = 'de';
@@ -1012,6 +1010,9 @@ class FigureBuilderTest extends TestCase
         $request->attributes->set('pageModel', $currentPage);
 
         $container->get('request_stack')->push($request);
+
+        (new DcaLoader('tl_files'))->load();
+        $GLOBALS['TL_DCA']['tl_files']['fields']['meta']['eval']['metaFields'] = ['title' => ''];
 
         [$absoluteFilePath] = $this->getTestFilePaths();
 
