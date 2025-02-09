@@ -17,11 +17,11 @@ use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsHook;
 use Contao\CoreBundle\Exception\AccessDeniedException;
 use Contao\CoreBundle\Framework\ContaoFramework;
+use Contao\CoreBundle\String\HtmlAttributes;
 use Contao\DataContainer;
 use Contao\Image;
 use Contao\Input;
 use Contao\Message;
-use Contao\StringUtil;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Clock\ClockInterface;
@@ -191,10 +191,16 @@ class PreviewLinkListener
         $title ??= $this->translator->trans('tl_preview_link.share.0', [], 'contao_tl_preview_link');
 
         return \sprintf(
-            '<a href="%s" target="_blank" title="%s" data-controller="contao--clipboard" data-contao--clipboard-content-value="%s" data-action="contao--clipboard#write:prevent">%s</a> ',
-            StringUtil::specialcharsUrl($url),
-            StringUtil::specialchars($title),
-            StringUtil::specialcharsUrl($url),
+            '<a%s><span class="url">%s</span></a>',
+            (new HtmlAttributes())
+                ->set('href', $url)
+                ->set('target', '_blank')
+                ->set('title', $title)
+                ->set('data-controller', 'contao--clipboard')
+                ->set('data-contao--clipboard-content-value', $url)
+                ->set('data-action', 'contao--clipboard#write:prevent')
+                ->addClass('clipboard')
+                ->set('data-contao--clipboard-written-class', 'clipboard--written'),
             $label ?? $url,
         );
     }
