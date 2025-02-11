@@ -51,7 +51,7 @@ class PageListener
         ;
 
         if ($user instanceof BackendUser && !$this->security->isGranted('ROLE_ADMIN')) {
-            $qb->where($qb->expr()->in('id', $user->news));
+            $qb->where($qb->expr()->in('id', $user->news ?: [0]));
         }
 
         $results = $qb->executeQuery();

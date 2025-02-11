@@ -125,7 +125,7 @@ class PageListenerTest extends ContaoTestCase
         $expr
             ->expects($this->once())
             ->method('in')
-            ->with('id', $user->news)
+            ->with('id', $user->news ?: [0])
         ;
 
         $queryBuilder = $this->createMock(QueryBuilder::class);
