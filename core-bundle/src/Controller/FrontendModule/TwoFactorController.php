@@ -33,6 +33,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @internal
+ *
+ * @deprecated Deprecated since Contao 5.6, to be removed in Contao 6;
+ *             use the content element instead.
  */
 #[AsFrontendModule(category: 'user', template: 'mod_two_factor')]
 class TwoFactorController extends AbstractFrontendModuleController
