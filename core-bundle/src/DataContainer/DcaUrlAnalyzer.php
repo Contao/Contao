@@ -23,8 +23,6 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Translation\TranslatorBagInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DcaUrlAnalyzer
 {
@@ -35,7 +33,6 @@ class DcaUrlAnalyzer
         private readonly RequestStack $requestStack,
         private readonly Security $securityHelper,
         private readonly RouterInterface $router,
-        private readonly TranslatorBagInterface&TranslatorInterface $translator,
         private readonly RecordLabeler $recordLabeler,
     ) {
     }
@@ -72,7 +69,7 @@ class DcaUrlAnalyzer
             return [
                 [
                     'url' => $this->router->generate('contao_backend', ['do' => $do, 'table' => $table]),
-                    'label' => $this->translator->trans("MOD.$do.0", [], 'contao_modules'),
+                    'label' => $this->recordLabeler->getLabel("contao.mod.$do", []),
                 ],
             ];
         }
@@ -120,7 +117,7 @@ class DcaUrlAnalyzer
 
         $links[] = [
             'url' => $this->router->generate('contao_backend', ['do' => $do, 'table' => $table]),
-            'label' => $this->translator->trans("MOD.$do.0", [], 'contao_modules'),
+            'label' => $this->recordLabeler->getLabel("contao.mod.$do", []),
         ];
 
         return array_reverse($links);

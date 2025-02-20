@@ -31,10 +31,19 @@ class FallbackRecordLabelListener
 
     public function __invoke(DataContainerRecordLabelEvent $event): void
     {
-        if (null !== $event->getLabel() || !str_starts_with($event->getIdentifier(), 'contao.db.')) {
+        if (null !== $event->getLabel()) {
             return;
         }
 
+        if (str_starts_with($event->getIdentifier(), 'contao.db.')) {
+            $this->setDcaLabel($event);
+        } elseif (str_starts_with($event->getIdentifier(), 'contao.mod.')) {
+            $this->setModuleLabel($event);
+        }
+    }
+
+    private function setDcaLabel(DataContainerRecordLabelEvent $event): void
+    {
         [, , $table, $id] = explode('.', $event->getIdentifier()) + [null, null, null, null];
 
         if (!$table || !$id) {
@@ -53,5 +62,12 @@ class FallbackRecordLabelListener
 
             $event->setLabel($this->translator->trans($labelKey, [$event->getData()['id']], $messageDomain));
         }
+    }
+
+    private function setModuleLabel(DataContainerRecordLabelEvent $event): void
+    {
+        [, , $do] = explode('.', $event->getIdentifier()) + [null, null, null];
+
+        $event->setLabel($this->translator->trans("MOD.$do.0", [], 'contao_modules'));
     }
 }
